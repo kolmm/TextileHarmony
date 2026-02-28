@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 40" fill="none">
+  <!-- Decorative wavy thread line -->
+  <path
+    d="M2 20 C12 14, 22 26, 32 20 S52 14, 62 20 S82 26, 92 20 S112 14, 122 20 S142 26, 152 20 S172 14, 182 20 S202 26, 212 20 S232 14, 238 20"
+    stroke="#8B6F4E"
+    stroke-width="0.8"
+    stroke-linecap="round"
+    opacity="0.3"
+    fill="none"
+  />
+  <!-- "Textile" in elegant serif -->
+  <text
+    x="28"
+    y="26"
+    font-family="'Playfair Display', Georgia, serif"
+    font-size="20"
+    font-weight="600"
+    fill="#8B6F4E"
+    letter-spacing="1"
+  >Textile</text>
+  <!-- "Harmony" in clean sans-serif -->
+  <text
+    x="132"
+    y="26"
+    font-family="'Inter', 'Helvetica Neue', sans-serif"
+    font-size="18"
+    font-weight="300"
+    fill="#8B6F4E"
+    letter-spacing="2"
+  >Harmony</text>
+  <!-- Small thread accent between words -->
+  <path
+    d="M124 16 C126 13, 128 19, 130 16"
+    stroke="#8B6F4E"
+    stroke-width="1"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.6"
+  />
+</svg>

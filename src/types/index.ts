@@ -11,20 +11,14 @@ export interface Product {
   materials: string;
   care: string;
   images: string[];
-  colors?: ProductColor[];
   sizes?: string[];
+  sizePrices?: Record<string, number>;
+  sizeOriginalPrices?: Record<string, number>;
   inStock: boolean;
   isNew: boolean;
   isBestseller: boolean;
-  rating: number;
-  reviewCount: number;
   dimensions?: string;
   weight?: string;
-}
-
-export interface ProductColor {
-  name: string;
-  hex: string;
 }
 
 export interface Category {
@@ -39,7 +33,6 @@ export interface Category {
 export interface CartItem {
   product: Product;
   quantity: number;
-  selectedColor?: string;
   selectedSize?: string;
 }
 
@@ -57,11 +50,19 @@ export interface ContactFormData {
   message: string;
 }
 
+export interface CheckoutFormData {
+  name: string;
+  email: string;
+  phone: string;
+  street: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
+
 export interface FilterState {
   category: string | null;
   priceRange: [number, number];
-  materials: string[];
-  colors: string[];
   inStockOnly: boolean;
 }
 
@@ -70,5 +71,4 @@ export type SortOption =
   | 'price-desc'
   | 'name-asc'
   | 'name-desc'
-  | 'newest'
-  | 'rating';
+  | 'newest';

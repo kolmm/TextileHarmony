@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Tag, X, Truck } from 'lucide-react';
 import { Button } from '@/components/ui';
-import { SITE_CONFIG } from '@/constants';
+import { ROUTES, SITE_CONFIG } from '@/constants';
 import { formatPrice } from '@/utils';
 
 interface CartSummaryProps {
@@ -15,8 +16,6 @@ interface CartSummaryProps {
   onRemovePromo: () => void;
 }
 
-const CHECKOUT_ALERT_MESSAGE = 'Checkout is not available in demo mode';
-
 export function CartSummary({
   subtotal,
   shippingCost,
@@ -27,6 +26,7 @@ export function CartSummary({
   onApplyPromo,
   onRemovePromo,
 }: CartSummaryProps) {
+  const navigate = useNavigate();
   const [promoInput, setPromoInput] = useState('');
   const [promoError, setPromoError] = useState<string | null>(null);
 
@@ -56,7 +56,7 @@ export function CartSummary({
   };
 
   const handleCheckout = () => {
-    alert(CHECKOUT_ALERT_MESSAGE);
+    navigate(ROUTES.CHECKOUT);
   };
 
   return (

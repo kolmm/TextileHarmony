@@ -20,8 +20,6 @@ import type { FilterState, SortOption } from '@/types';
 const DEFAULT_FILTERS: FilterState = {
   category: null,
   priceRange: [0, 300],
-  materials: [],
-  colors: [],
   inStockOnly: false,
 };
 

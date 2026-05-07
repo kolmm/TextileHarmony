@@ -12,6 +12,7 @@ const ContactPage = lazy(() => import('@/pages/ContactPage'));
 const PrivacyPolicyPage = lazy(() => import('@/pages/PrivacyPolicyPage'));
 const TermsOfUsePage = lazy(() => import('@/pages/TermsOfUsePage'));
 const ReturnPolicyPage = lazy(() => import('@/pages/ReturnPolicyPage'));
+const CheckoutPage = lazy(() => import('@/pages/CheckoutPage'));
 
 function PageFallback() {
   return (
@@ -37,6 +38,7 @@ function AnimatedRoutes() {
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-of-use" element={<TermsOfUsePage />} />
           <Route path="/return-policy" element={<ReturnPolicyPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </Suspense>
     </AnimatePresence>

@@ -6,8 +6,8 @@ import { Footer } from '@/components/layout/Footer';
 import CookieBanner from '@/components/layout/CookieBanner';
 import { Breadcrumb } from '@/components/common/Breadcrumb';
 
-const LAST_UPDATED = 'January 15, 2024';
-const DPO_EMAIL = 'hello@textileharmony.eu';
+const LAST_UPDATED = '2026';
+const DPO_EMAIL = 'business@textile-harmony.com';
 
 export default function PrivacyPolicyPage() {
   const cartItemCount = useCartStore((s) => s.getItemCount());
@@ -63,16 +63,14 @@ export default function PrivacyPolicyPage() {
               The data controller responsible for your personal data is:
             </p>
             <address className="not-italic">
-              <p className="font-medium text-text">TextileHarmony B.V.</p>
-              <p>Keizersgracht 123</p>
-              <p>1015 CJ Amsterdam, Netherlands</p>
+              <p className="font-medium text-text">TextileHarmony SRL</p>
               <p>
                 Email:{' '}
                 <a href={`mailto:${DPO_EMAIL}`} className="text-accent hover:text-accent-hover">
                   {DPO_EMAIL}
                 </a>
               </p>
-              <p>Phone: +31 20 123 4567</p>
+              <p>Phone: +372 5427 7186</p>
             </address>
           </section>
 
@@ -329,7 +327,6 @@ export default function PrivacyPolicyPage() {
             </p>
             <div className="mt-3 rounded-lg border border-border bg-surface p-4">
               <p className="font-medium text-text">TextileHarmony Data Protection Officer</p>
-              <p>Keizersgracht 123, 1015 CJ Amsterdam, Netherlands</p>
               <p>
                 Email:{' '}
                 <a href={`mailto:${DPO_EMAIL}`} className="text-accent hover:text-accent-hover">

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { heroTextReveal, staggerContainer, buttonHover, buttonTap } from '@/lib/animations';
 import { ROUTES } from '@/constants';
 
-const HERO_IMAGE_URL = 'https://placehold.co/1920x800/E3DAC9/8B6F4E?text=TextileHarmony';
+const HERO_IMAGE_URL = 'https://images.unsplash.com/photo-1750420556288-d0e32a6f517b?w=1920&h=1080&fit=crop&q=80';
 
 export function HeroSection() {
   return (

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Star, Minus, Plus, ShoppingBag, ArrowLeft, Truck, RotateCcw, Shield } from 'lucide-react';
+import { Minus, Plus, ShoppingBag, ArrowLeft, Truck, RotateCcw, Shield } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import CookieBanner from '@/components/layout/CookieBanner';
@@ -12,7 +12,7 @@ import { Button, Badge } from '@/components/ui';
 import { useToast } from '@/components/ui/Toast';
 import { products } from '@/data/products';
 import { categories } from '@/data/categories';
-import { getRelatedProducts, calculateDiscount, formatPrice } from '@/utils';
+import { getRelatedProducts, calculateDiscount, formatPrice, getProductPrice, getProductOriginalPrice } from '@/utils';
 import { useCartStore } from '@/store/cartStore';
 import { pageTransition, fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
 import { SITE_CONFIG } from '@/constants';
@@ -33,9 +33,6 @@ export default function ProductPage() {
 
   const product = products.find((p) => p.id === id);
 
-  const [selectedColor, setSelectedColor] = useState<string | undefined>(
-    product?.colors?.[0]?.name,
-  );
   const [selectedSize, setSelectedSize] = useState<string | undefined>(
     product?.sizes?.[0],
   );
@@ -80,8 +77,10 @@ export default function ProductPage() {
     );
   }
 
-  const discount = product.originalPrice
-    ? calculateDiscount(product.originalPrice, product.price)
+  const currentPrice = getProductPrice(product, selectedSize);
+  const currentOriginalPrice = getProductOriginalPrice(product, selectedSize);
+  const discount = currentOriginalPrice
+    ? calculateDiscount(currentOriginalPrice, currentPrice)
     : 0;
 
   const category = categories.find((c) => c.slug === product.category);
@@ -96,7 +95,7 @@ export default function ProductPage() {
   ];
 
   const handleAddToCart = () => {
-    addItem(product, quantity, selectedColor, selectedSize);
+    addItem(product, quantity, selectedSize);
     addToast('Added to cart', 'success');
   };
 
@@ -156,34 +155,14 @@ export default function ProductPage() {
                 {product.name}
               </h1>
 
-              {/* Rating */}
-              <div className="mb-4 flex items-center gap-2">
-                <div className="flex">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <Star
-                      key={i}
-                      size={16}
-                      className={
-                        i < Math.round(product.rating)
-                          ? 'fill-accent text-accent'
-                          : 'text-border'
-                      }
-                    />
-                  ))}
-                </div>
-                <span className="text-sm text-secondary">
-                  {product.rating} ({product.reviewCount} reviews)
-                </span>
-              </div>
-
               {/* Price */}
               <div className="mb-4 flex items-baseline gap-3">
                 <span className="text-2xl font-bold text-accent">
-                  {formatPrice(product.price)}
+                  {formatPrice(currentPrice)}
                 </span>
-                {product.originalPrice && (
+                {currentOriginalPrice && (
                   <span className="text-lg text-secondary line-through">
-                    {formatPrice(product.originalPrice)}
+                    {formatPrice(currentOriginalPrice)}
                   </span>
                 )}
               </div>
@@ -192,34 +171,6 @@ export default function ProductPage() {
               <p className="mb-6 text-sm leading-relaxed text-secondary">
                 {product.shortDescription}
               </p>
-
-              {/* Color selector */}
-              {product.colors && product.colors.length > 0 && (
-                <div className="mb-5">
-                  <p className="mb-2 text-sm font-medium text-text">
-                    Color:{' '}
-                    <span className="font-normal text-secondary">
-                      {selectedColor}
-                    </span>
-                  </p>
-                  <div className="flex flex-wrap gap-2.5">
-                    {product.colors.map((color) => (
-                      <button
-                        key={color.name}
-                        onClick={() => setSelectedColor(color.name)}
-                        title={color.name}
-                        className={`h-9 w-9 rounded-full border-2 transition-all cursor-pointer ${
-                          selectedColor === color.name
-                            ? 'ring-2 ring-accent ring-offset-2 border-accent'
-                            : 'border-border hover:border-secondary'
-                        }`}
-                        style={{ backgroundColor: color.hex }}
-                        aria-label={`Select color ${color.name}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {/* Size selector */}
               {product.sizes && product.sizes.length > 0 && (

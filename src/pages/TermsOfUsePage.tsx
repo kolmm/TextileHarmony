@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import CookieBanner from '@/components/layout/CookieBanner';
 import { Breadcrumb } from '@/components/common/Breadcrumb';
 
-const LAST_UPDATED = 'January 15, 2024';
+const LAST_UPDATED = '2026';
 
 export default function TermsOfUsePage() {
   const cartItemCount = useCartStore((s) => s.getItemCount());
@@ -44,7 +44,7 @@ export default function TermsOfUsePage() {
               1. General Terms
             </h2>
             <p className="mb-3">
-              Welcome to TextileHarmony. By accessing and using our website at textileharmony.eu,
+              Welcome to TextileHarmony. By accessing and using our website at textile-harmony.com,
               you agree to be bound by these Terms of Use, all applicable laws and regulations, and
               agree that you are responsible for compliance with any applicable local laws.
             </p>
@@ -188,7 +188,7 @@ export default function TermsOfUsePage() {
             <p className="mb-3">
               All content on this website, including but not limited to text, graphics, logos,
               images, product descriptions, photographs, and software, is the property of
-              TextileHarmony B.V. or its content suppliers and is protected by international
+              TextileHarmony SRL or its content suppliers and is protected by international
               copyright, trademark, and other intellectual property laws.
             </p>
             <p>
@@ -206,7 +206,7 @@ export default function TermsOfUsePage() {
               7. Limitation of Liability
             </h2>
             <p className="mb-3">
-              To the maximum extent permitted by applicable law, TextileHarmony B.V. and its
+              To the maximum extent permitted by applicable law, TextileHarmony SRL and its
               directors, employees, partners, agents, and affiliates shall not be liable for any
               indirect, incidental, special, consequential, or punitive damages, including but not
               limited to loss of profits, data, or goodwill, arising from or related to your use of

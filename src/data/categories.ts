@@ -1,0 +1,60 @@
+import type { Category } from '@/types';
+
+export const categories: Category[] = [
+  {
+    id: 'cat-bedding',
+    name: 'Bedding',
+    slug: 'bedding',
+    description: 'Dreamy bedding essentials for restful nights',
+    image: 'https://placehold.co/800x600/F0EBE3/8B6F4E?text=Bedding',
+    productCount: 6,
+  },
+  {
+    id: 'cat-curtains-blinds',
+    name: 'Curtains & Blinds',
+    slug: 'curtains-blinds',
+    description: 'Elegant window treatments for every room',
+    image: 'https://placehold.co/800x600/F0EBE3/8B6F4E?text=Curtains+%26+Blinds',
+    productCount: 5,
+  },
+  {
+    id: 'cat-rugs-carpets',
+    name: 'Rugs & Carpets',
+    slug: 'rugs-carpets',
+    description: 'Soft underfoot comfort and style',
+    image: 'https://placehold.co/800x600/F0EBE3/8B6F4E?text=Rugs+%26+Carpets',
+    productCount: 5,
+  },
+  {
+    id: 'cat-cushions-throws',
+    name: 'Cushions & Throws',
+    slug: 'cushions-throws',
+    description: 'Cozy accents for your living space',
+    image: 'https://placehold.co/800x600/F0EBE3/8B6F4E?text=Cushions+%26+Throws',
+    productCount: 5,
+  },
+  {
+    id: 'cat-table-kitchen',
+    name: 'Table & Kitchen',
+    slug: 'table-kitchen',
+    description: 'Beautiful dining and kitchen textiles',
+    image: 'https://placehold.co/800x600/F0EBE3/8B6F4E?text=Table+%26+Kitchen',
+    productCount: 5,
+  },
+  {
+    id: 'cat-bathroom',
+    name: 'Bathroom',
+    slug: 'bathroom',
+    description: 'Luxurious bath essentials',
+    image: 'https://placehold.co/800x600/F0EBE3/8B6F4E?text=Bathroom',
+    productCount: 5,
+  },
+  {
+    id: 'cat-decorative',
+    name: 'Decorative',
+    slug: 'decorative',
+    description: 'Unique accents to complete your home',
+    image: 'https://placehold.co/800x600/F0EBE3/8B6F4E?text=Decorative',
+    productCount: 5,
+  },
+];

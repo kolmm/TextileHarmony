@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { CartItem, Product } from '@/types';
 import { PROMO_CODES, SITE_CONFIG } from '@/constants';
+import { getProductPrice } from '@/utils';
 
 interface CartStore {
   items: CartItem[];
@@ -10,7 +11,6 @@ interface CartStore {
   addItem: (
     product: Product,
     quantity?: number,
-    selectedColor?: string,
     selectedSize?: string,
   ) => void;
   removeItem: (productId: string) => void;
@@ -35,14 +35,12 @@ export const useCartStore = create<CartStore>()(
       addItem: (
         product: Product,
         quantity = 1,
-        selectedColor?: string,
         selectedSize?: string,
       ) => {
         set((state) => {
           const existingIndex = state.items.findIndex(
             (item) =>
               item.product.id === product.id &&
-              item.selectedColor === selectedColor &&
               item.selectedSize === selectedSize,
           );
 
@@ -58,7 +56,7 @@ export const useCartStore = create<CartStore>()(
           return {
             items: [
               ...state.items,
-              { product, quantity, selectedColor, selectedSize },
+              { product, quantity, selectedSize },
             ],
           };
         });
@@ -106,7 +104,7 @@ export const useCartStore = create<CartStore>()(
       getSubtotal: (): number => {
         const { items } = get();
         return items.reduce(
-          (total, item) => total + item.product.price * item.quantity,
+          (total, item) => total + getProductPrice(item.product, item.selectedSize) * item.quantity,
           0,
         );
       },

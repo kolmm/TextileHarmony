@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import type { CartItem as CartItemType } from '@/types';
-import { formatPrice } from '@/utils';
+import { formatPrice, getProductPrice } from '@/utils';
 
 interface CartItemProps {
   item: CartItemType;
@@ -13,8 +13,9 @@ const MIN_QUANTITY = 1;
 const MAX_QUANTITY = 99;
 
 export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
-  const { product, quantity, selectedColor, selectedSize } = item;
-  const lineTotal = product.price * quantity;
+  const { product, quantity, selectedSize } = item;
+  const unitPrice = getProductPrice(product, selectedSize);
+  const lineTotal = unitPrice * quantity;
 
   const handleDecrement = () => {
     if (quantity > MIN_QUANTITY) {
@@ -53,15 +54,14 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
           {product.name}
         </h3>
 
-        {(selectedColor || selectedSize) && (
+        {selectedSize && (
           <div className="flex flex-wrap gap-2 text-xs text-secondary">
-            {selectedColor && <span>Color: {selectedColor}</span>}
-            {selectedSize && <span>Size: {selectedSize}</span>}
+            <span>Size: {selectedSize}</span>
           </div>
         )}
 
         <p className="text-sm font-medium text-accent">
-          {formatPrice(product.price)}
+          {formatPrice(unitPrice)}
         </p>
       </div>
 

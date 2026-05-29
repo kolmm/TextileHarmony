@@ -1,5 +1,5 @@
 import { type ComponentPropsWithoutRef } from 'react';
-import { motion } from 'framer-motion';
+import { type HTMLMotionProps, motion } from 'framer-motion';
 
 const variants = {
   primary:
@@ -18,7 +18,10 @@ const sizes = {
   lg: 'px-7 py-3.5 text-lg',
 } as const;
 
-interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'children'> {
+type MotionButtonProps = Omit<HTMLMotionProps<'button'>, 'children'>;
+type NativeButtonProps = Omit<ComponentPropsWithoutRef<'button'>, 'children'>;
+
+interface ButtonProps extends Omit<NativeButtonProps & MotionButtonProps, 'children'> {
   children: React.ReactNode;
   variant?: keyof typeof variants;
   size?: keyof typeof sizes;

@@ -61,10 +61,11 @@ export default function CartPage() {
       initial="initial"
       animate="animate"
       exit="exit"
+      className="flex min-h-screen flex-col"
     >
       <Header cartItemCount={cartItemCount} />
 
-      <main className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
+      <main className="mx-auto max-w-7xl flex-1 px-4 py-8 lg:px-8">
         <div className="mb-6">
           <Breadcrumb items={breadcrumbItems} />
         </div>

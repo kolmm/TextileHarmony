@@ -1,6 +1,20 @@
 import type { FilterState, Product, SortOption } from '@/types';
 import { SITE_CONFIG } from '@/constants';
 
+export function getProductPrice(product: Product, selectedSize?: string): number {
+  if (selectedSize && product.sizePrices?.[selectedSize] !== undefined) {
+    return product.sizePrices[selectedSize];
+  }
+  return product.price;
+}
+
+export function getProductOriginalPrice(product: Product, selectedSize?: string): number | undefined {
+  if (selectedSize && product.sizeOriginalPrices?.[selectedSize] !== undefined) {
+    return product.sizeOriginalPrices[selectedSize];
+  }
+  return product.originalPrice;
+}
+
 export function formatPrice(price: number): string {
   return `${SITE_CONFIG.CURRENCY_SYMBOL}${price.toFixed(2)}`;
 }
@@ -19,30 +33,6 @@ export function filterProducts(
     const [minPrice, maxPrice] = filters.priceRange;
     if (product.price < minPrice || product.price > maxPrice) {
       return false;
-    }
-
-    // Filter by materials
-    if (filters.materials.length > 0) {
-      const productMaterials = product.materials
-        .split(',')
-        .map((m) => m.trim());
-      const hasMatchingMaterial = filters.materials.some((filterMaterial) =>
-        productMaterials.some(
-          (pm) => pm.toLowerCase() === filterMaterial.toLowerCase(),
-        ),
-      );
-      if (!hasMatchingMaterial) return false;
-    }
-
-    // Filter by colors
-    if (filters.colors.length > 0) {
-      if (!product.colors || product.colors.length === 0) return false;
-      const hasMatchingColor = filters.colors.some((filterColor) =>
-        product.colors!.some(
-          (pc) => pc.name.toLowerCase() === filterColor.toLowerCase(),
-        ),
-      );
-      if (!hasMatchingColor) return false;
     }
 
     // Filter by stock
@@ -74,8 +64,6 @@ export function sortProducts(
         if (a.isNew === b.isNew) return a.name.localeCompare(b.name);
         return a.isNew ? -1 : 1;
       });
-    case 'rating':
-      return sorted.sort((a, b) => b.rating - a.rating);
     default:
       return sorted;
   }

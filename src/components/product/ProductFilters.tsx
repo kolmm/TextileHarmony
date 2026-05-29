@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, SlidersHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import type { FilterState, Category } from '@/types';
-import { MATERIALS_LIST, COLORS_LIST } from '@/constants';
-
 interface ProductFiltersProps {
   filters: FilterState;
   onFilterChange: (filters: FilterState) => void;
@@ -22,34 +20,16 @@ function FilterContent({ filters, onFilterChange, categories }: ProductFiltersPr
     onFilterChange({ ...filters, priceRange: newRange });
   };
 
-  const toggleMaterial = (material: string) => {
-    const materials = filters.materials.includes(material)
-      ? filters.materials.filter((m) => m !== material)
-      : [...filters.materials, material];
-    onFilterChange({ ...filters, materials });
-  };
-
-  const toggleColor = (color: string) => {
-    const colors = filters.colors.includes(color)
-      ? filters.colors.filter((c) => c !== color)
-      : [...filters.colors, color];
-    onFilterChange({ ...filters, colors });
-  };
-
   const clearAll = () => {
     onFilterChange({
       category: null,
       priceRange: [0, 300],
-      materials: [],
-      colors: [],
       inStockOnly: false,
     });
   };
 
   const hasActiveFilters =
     filters.category !== null ||
-    filters.materials.length > 0 ||
-    filters.colors.length > 0 ||
     filters.inStockOnly ||
     filters.priceRange[0] > 0 ||
     filters.priceRange[1] < 300;
@@ -115,51 +95,6 @@ function FilterContent({ filters, onFilterChange, categories }: ProductFiltersPr
             className="w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-text focus:border-accent focus:outline-none"
             placeholder="Max"
           />
-        </div>
-      </div>
-
-      {/* Materials */}
-      <div>
-        <h3 className="mb-3 font-serif text-sm font-semibold uppercase tracking-wider text-text">
-          Materials
-        </h3>
-        <div className="flex flex-col gap-2">
-          {MATERIALS_LIST.map((mat) => (
-            <label
-              key={mat}
-              className="flex cursor-pointer items-center gap-2 text-sm text-text"
-            >
-              <input
-                type="checkbox"
-                checked={filters.materials.includes(mat)}
-                onChange={() => toggleMaterial(mat)}
-                className="h-4 w-4 rounded border-border accent-accent"
-              />
-              {mat}
-            </label>
-          ))}
-        </div>
-      </div>
-
-      {/* Colors */}
-      <div>
-        <h3 className="mb-3 font-serif text-sm font-semibold uppercase tracking-wider text-text">
-          Colors
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          {COLORS_LIST.map((color) => (
-            <button
-              key={color.name}
-              onClick={() => toggleColor(color.name)}
-              title={color.name}
-              className={`h-8 w-8 rounded-full border-2 transition-all cursor-pointer ${
-                filters.colors.includes(color.name)
-                  ? 'border-accent scale-110'
-                  : 'border-border hover:border-secondary'
-              }`}
-              style={{ backgroundColor: color.hex }}
-            />
-          ))}
         </div>
       </div>
 

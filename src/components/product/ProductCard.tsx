@@ -1,29 +1,12 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ShoppingBag, Star } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import type { Product } from '@/types';
 
 interface ProductCardProps {
   product: Product;
   onAddToCart?: (product: Product) => void;
-}
-
-function StarRating({ rating, reviewCount }: { rating: number; reviewCount: number }) {
-  return (
-    <div className="flex items-center gap-1.5">
-      <div className="flex">
-        {Array.from({ length: 5 }, (_, i) => (
-          <Star
-            key={i}
-            size={12}
-            className={i < Math.round(rating) ? 'fill-accent text-accent' : 'text-border'}
-          />
-        ))}
-      </div>
-      <span className="text-xs text-secondary">({reviewCount})</span>
-    </div>
-  );
 }
 
 export function ProductCard({ product, onAddToCart }: ProductCardProps) {
@@ -94,7 +77,6 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
             {product.name}
           </h3>
         </Link>
-        <StarRating rating={product.rating} reviewCount={product.reviewCount} />
         <div className="mt-2 flex items-center gap-2">
           <span className="text-base font-bold text-accent">
             &euro;{product.price.toFixed(2)}

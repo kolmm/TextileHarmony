@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Mail, Phone, Clock } from 'lucide-react';
+import { Mail, Phone, Clock } from 'lucide-react';
 import { pageTransition, fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
 import { useCartStore } from '@/store/cartStore';
 import { CONTACT_INFO } from '@/constants';
@@ -19,9 +19,6 @@ const SUBJECT_OPTIONS = [
   { value: 'wholesale', label: 'Wholesale Inquiry' },
   { value: 'other', label: 'Other' },
 ] as const;
-
-const MAP_PLACEHOLDER_URL =
-  'https://placehold.co/600x300/F0EBE3/8B6F4E?text=Map';
 
 const INITIAL_FORM: ContactFormData = {
   name: '',
@@ -112,10 +109,11 @@ export default function ContactPage() {
       initial="initial"
       animate="animate"
       exit="exit"
+      className="flex min-h-screen flex-col"
     >
       <Header cartItemCount={cartItemCount} />
 
-      <main className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
+      <main className="mx-auto max-w-7xl flex-1 px-4 py-8 lg:px-8">
         <div className="mb-6">
           <Breadcrumb items={breadcrumbItems} />
         </div>
@@ -124,9 +122,9 @@ export default function ContactPage() {
           Contact Us
         </h1>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
           {/* Contact form */}
-          <motion.div variants={fadeInUp} initial="initial" animate="animate">
+          <motion.div variants={fadeInUp} initial="initial" animate="animate" className="lg:col-span-2">
             <h2 className="mb-6 font-serif text-lg font-semibold text-text">
               Send Us a Message
             </h2>
@@ -220,16 +218,6 @@ export default function ContactPage() {
             <div className="mb-8 flex flex-col gap-6">
               <motion.div variants={staggerItem} className="flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface text-accent">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-text">Address</h3>
-                  <p className="text-sm text-secondary">{CONTACT_INFO.address}</p>
-                </div>
-              </motion.div>
-
-              <motion.div variants={staggerItem} className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface text-accent">
                   <Mail size={20} />
                 </div>
                 <div>
@@ -274,15 +262,6 @@ export default function ContactPage() {
               </motion.div>
             </div>
 
-            {/* Map placeholder */}
-            <div className="overflow-hidden rounded-lg border border-border">
-              <img
-                src={MAP_PLACEHOLDER_URL}
-                alt="TextileHarmony store location map"
-                className="h-auto w-full"
-                loading="lazy"
-              />
-            </div>
           </motion.div>
         </div>
       </main>

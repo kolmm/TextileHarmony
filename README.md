@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+# TextileHarmony
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Online store for home textiles and decor (bedding, curtains, rugs, tableware, glassware and other home goods). Single-page React application with a full catalog, cart, checkout flow and GDPR-compliant legal pages. All content is in English, all prices in EUR.
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** + **TypeScript**
+- **Vite 7** - build tool and dev server
+- **Tailwind CSS 4** - styling (via `@tailwindcss/vite`)
+- **React Router 7** - client-side routing with lazy-loaded pages
+- **Zustand 5** - state management (cart, cookie consent)
+- **Framer Motion** - page transitions and animations
+- **lucide-react** - icons
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Requires Node.js 20+.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install      # install dependencies
+npm run dev      # start dev server (http://localhost:5173)
+npm run build    # type-check and build for production
+npm run preview  # preview the production build locally
+npm run lint     # run ESLint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+  assets/        # logo and static SVG assets
+  components/
+    cart/        # cart item, cart summary
+    common/      # breadcrumb, scroll-to-top
+    home/        # hero, category grid, best sellers, newsletter, etc.
+    layout/      # header, footer, cookie banner
+    product/     # product card, gallery, filters
+    ui/          # reusable primitives (button, modal, input, toast, ...)
+  constants/     # site config, routes, promo codes, sort options
+  data/          # product and category catalog data
+  hooks/         # useScrollAnimation, useMediaQuery
+  lib/           # shared animation variants
+  pages/         # route-level pages (lazy loaded)
+  store/         # Zustand stores (cart, cookie consent)
+  types/         # shared TypeScript types
+  utils/         # helper functions
+```
+
+## Routes
+
+| Path | Page |
+|------|------|
+| `/` | Home |
+| `/catalog`, `/catalog/:category` | Catalog with filtering and sorting |
+| `/product/:id` | Product detail |
+| `/cart` | Shopping cart |
+| `/checkout` | Checkout |
+| `/contact` | Contact |
+| `/privacy-policy` | Privacy Policy (GDPR) |
+| `/terms-of-use` | Terms of Use |
+| `/return-policy` | Return Policy |
+
+## Notable features
+
+- Cart and cookie-consent state persisted via Zustand.
+- Cookie banner and privacy / terms / return policy pages for GDPR compliance.
+- Free shipping threshold and flat shipping cost, promo codes, and a 14-day return window - all configured in `src/constants/index.ts`.
+- Animated route transitions via Framer Motion `AnimatePresence`.
+
+## Configuration
+
+Store-wide settings (currency, shipping, promo codes, social links, registration data) live in `src/constants/index.ts`. Catalog content lives in `src/data/`.
